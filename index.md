@@ -9,38 +9,7 @@
 > 음원에서 푸리에 트랜스폼을 이용하여 악보를 추출하는 것.
 > 프로젝트 이름: Music Seat
   > 이름 선정사유: 악보라는 뜻의 music sheet의 sheet를 변형하여 의자에 앉아서 쉽게 악보를 다운받는 다는 뜻에서 music seat 라는 제목을 추천
-  
+  > 성정훈의  선정
  >프로젝트 로고
   ![Alt text](https://user-images.githubusercontent.com/21376885/37081264-30626692-222c-11e8-8bfc-d8aaf81be933.png)
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kookmin-sw/cap-template/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+ >조용현 제작
