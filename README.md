@@ -3,6 +3,7 @@
 **팀페이지 주소**
 
 팀페이지 주소: https://github.com/kookmin-sw/2018-cap1-14
+팀 소개 주소 https://kookmin-sw.github.io/2018-cap1-14/
 
 
 ### 1. 프로잭트 소개
