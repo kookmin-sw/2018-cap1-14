@@ -1,11 +1,13 @@
 from youtube_convertor import WaveConvertor
+from youtube_convertor import Wave
 import unittest
-import math
 
 class TestWaveConvertor(unittest.TestCase):
 
     def test_get_wave(self):
-        rate, data = WaveConvertor().get_wave("https://www.youtube.com/watch?v=OxgiiyLp5pk")
-        play_time = len(data) / rate
-        self.assertEqual(44100, rate)
-        self.assertEqual(339, math.floor(play_time))
+        wave = WaveConvertor().get_wave("https://www.youtube.com/watch?v=OxgiiyLp5pk")
+        print(wave)
+        self.assertEqual(44100, wave.rate)
+        self.assertEqual(339, wave.play_time)
+        wave.fourier_transform()
+        

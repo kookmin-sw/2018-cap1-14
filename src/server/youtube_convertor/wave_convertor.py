@@ -2,7 +2,7 @@ from pytube import YouTube
 from scipy.io import wavfile
 import os
 import subprocess
-
+from youtube_convertor.wave import Wave
 
 class WaveConvertor(object):
     def get_wave(self, youtube_url):
@@ -56,16 +56,14 @@ class WaveConvertor(object):
             filename : str
                 file name to read
         returns -
-            rate : int
-                rate of wave
-            data : numpy.ndarray
-                sequencial data of wave 
+            wave : youtube_convertor.Wave
+                wave data instance
         '''
         rate, data = wavfile.read(filename + ".wav")
         print("read wav file - " + filename)
         self.__delete_cache_file(filename)
         print("delete cache file - " + filename)
-        return rate, data
+        return Wave(rate, data)
       
     def __delete_cache_file(selfm, filename):
         os.remove(filename + ".mp4")
