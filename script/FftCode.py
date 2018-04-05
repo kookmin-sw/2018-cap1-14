@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fftpack import fft
 from scipy.io import wavfile # get the api
+from operator import eq
 fs, data = wavfile.read('Air.wav') # load the data
 y = data.T[0] # this is a two channel soundtrack, I get the first track
-time = data.shape[0] / rate
 
 blockSize = int(fs / 10)
 blockHall = int(len(y) / blockSize)
@@ -26,7 +26,7 @@ for i in range(0, blockHall):
     amplitude_Hz = 2*abs(Y)
     phase_ang = np.angle(Y)*180/np.pi
 
-    bank = np.where((amplitude_Hz >= (amplitude_Hz.max() / 4)) & (amplitude_Hz > 250))
+    bank = np.where((amplitude_Hz >= (amplitude_Hz.max() / 4)) & (amplitude_Hz > 400))
 
     result = '침묵'
 
@@ -52,13 +52,31 @@ for i in range(0, blockHall):
         elif (check > 220 and check <= 247):
             result = noteName[6]
 
+    '''
     plt.plot(f0,amplitude_Hz,'r')
     plt.title('Single-Sided Amplitude Spectrum of y(t)' + str(check))
     plt.xlabel('frequency($Hz$)')
     plt.ylabel('amplitude')
     plt.xlim(0,4000)
     plt.show()
+    '''
     
-    ans.insert(i, result + str(check))
+    ans.insert(i, result)
+
+noteBank = ans[0]
+sameBank = 0
+
+for i in range(1, blockHall):
+    if (eq(ans[i], noteBank)):
+        sameBank += 1
+    else:
+        noteBank = ans[i]
+
+        if (sameBank < 1):
+            ans[i - 1] = noteBank
+
+        sameBank = 0
+    
+    ans[i - 1] = ans[i - 1]
     
 ans
