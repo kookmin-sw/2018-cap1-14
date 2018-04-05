@@ -1,7 +1,6 @@
-<form class="form-inline">
+<form class="form-inline" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label class="sr-only" for="exampleInputPassword3">search</label>
-    <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Youtube url">
+    <input type="text" class="form-control" placeholder="Youtube URL" [(ngModel)]="youtubeUrl" name="youtubeUrl"/>
   </div>
   <button type="submit" class="btn btn-default">추출</button>
 </form>
