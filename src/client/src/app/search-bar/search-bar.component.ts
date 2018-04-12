@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-search-bar',
@@ -9,9 +9,14 @@ import { HttpClient } from '@angular/common/http';
 export class SearchBarComponent implements OnInit {
 
   youtubeUrl: string;
-
+  headers;
   constructor(public http: HttpClient) { 
     this.youtubeUrl="";
+    this.headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+
+
   }
 
   ngOnInit() {
@@ -19,10 +24,8 @@ export class SearchBarComponent implements OnInit {
 
   onSubmit() {
     let serverUrl = "http://localhost:5000/extract";
-    this.http.post(serverUrl, {youtubeUrl: this.youtubeUrl}).subscribe(data => {
-        alert("test");
-    }, err=> {
-        alert("err");
+    this.http.post(serverUrl, {"youtubeUrl":this.youtubeUrl}, this.headers).subscribe((data) => {
+        alert(JSON.stringify(data));
     });
   }
 
