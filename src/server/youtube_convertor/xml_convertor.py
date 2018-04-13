@@ -53,14 +53,14 @@ class XmlConvertor(object):
                 octave = note[1]
                 note_xml = ('<note>\n' +
                                 '<pitch>\n' +
-                                    '<step>' + str(steb) + '</step>\n' +
-                                    '<octave>' + str(octave) + '</octave>\n' +
+                                    '<step>' + steb + '</step>\n' +
+                                    '<octave>' + str(int(octave) + 1) + '</octave>\n' +
                                 '</pitch>\n' +
                                 '<duration>' + str(duration) + '</duration>\n' +
                                 '<type>whole</type>\n' +
                             '</note>\n')
                 duration = 1
-            notes_xml += note_xml
+                notes_xml += note_xml
             
         return header + notes_xml + footer
                 
