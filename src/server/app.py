@@ -18,7 +18,19 @@ def extract():
     youtube = WaveConvertor()
     youtube.get_wave("https://www.youtube.com/watch?v=q3fHXqXYMfA")
     
-    xml = XmlConvertor.convert("test")
+    notes = []        
+
+    #test code
+    notes.append("C4")
+    notes.append("D4")
+    notes.append("E4")
+    notes.append("F4")
+    notes.append("G4")
+    notes.append("A4")
+    notes.append("B4")
+    #test code
+
+    xml = XmlConvertor.convert(notes)
     print(xml)
 
     return jsonify(xml=xml)
