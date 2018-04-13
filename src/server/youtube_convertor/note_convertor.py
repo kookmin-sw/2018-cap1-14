@@ -52,9 +52,9 @@ class NoteConvertor(object):
         elif pitch > 175 and pitch <= 196:
             return "G3"
         elif pitch > 196 and pitch <= 220:
-            return "A4"
+            return "A3"
         elif pitch > 220 and pitch <= 247:
-            return "B4"
+            return "B3"
         else:
             return "_"
 
