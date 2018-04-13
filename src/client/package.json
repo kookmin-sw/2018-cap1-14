@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "core-js": "^2.4.1",
+    "node-sass": "^4.8.3",
+    "opensheetmusicdisplay": "^0.2.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
