@@ -55,6 +55,48 @@ class NoteConvertor(object):
             return "A3"
         elif pitch > 220 and pitch <= 247:
             return "B3"
+        elif pitch > 247 and pitch <= 262:
+            return "C4"
+        elif pitch > 262 and pitch <= 294:
+            return "D4"
+        elif pitch > 294 and pitch <= 330:
+            return "E4"
+        elif pitch > 330 and pitch <= 349:
+            return "F4"
+        elif pitch > 349 and pitch <= 392:
+            return "G4"
+        elif pitch > 392 and pitch <= 440:
+            return "A4"
+        elif pitch > 440 and pitch <= 494:
+            return "B4"
+        elif pitch > 494 and pitch <= 523:
+            return "C5"
+        elif pitch > 523 and pitch <= 587:
+            return "D5"
+        elif pitch > 587 and pitch <= 659:
+            return "E5"
+        elif pitch > 659 and pitch <= 698:
+            return "F5"
+        elif pitch > 698 and pitch <= 784:
+            return "G5"
+        elif pitch > 784 and pitch <= 880:
+            return "A5"
+        elif pitch > 880 and pitch <= 988:
+            return "B5"
+        elif pitch > 988 and pitch <= 1047:
+            return "C6"
+        elif pitch > 1047 and pitch <= 1175:
+            return "D6"
+        elif pitch > 1175 and pitch <= 1319:
+            return "E6"
+        elif pitch > 1319 and pitch <= 1397:
+            return "F6"
+        elif pitch > 1397 and pitch <= 1568:
+            return "G6"
+        elif pitch > 1568 and pitch <= 1760:
+            return "A6"
+        elif pitch > 1760 and pitch <= 1976:
+            return "B6"
         else:
             return "_"
 
