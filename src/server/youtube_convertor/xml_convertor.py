@@ -79,17 +79,18 @@ class XmlConvertor(object):
             if (before_note == note) or (len(note) == 1):
                 duration += 1
             else:
-                steb = before_note[0]
-                octave = before_note[1]
-                note_xml = ('<note>\n' +
-                                '<pitch>\n' +
-                                    '<step>' + steb + '</step>\n' +
-                                    '<octave>' + str(int(octave) + 1) + '</octave>\n' +
-                                '</pitch>\n' +
-                                '<duration>' + str(duration) + '</duration>\n' +
-                                '<type>whole</type>\n' +
-                            '</note>\n')
-                notes_xml += note_xml
+                if len(before_note) > 1:
+                    steb = before_note[0]
+                    octave = before_note[1]
+                    note_xml = ('<note>\n' +
+                                    '<pitch>\n' +
+                                        '<step>' + steb + '</step>\n' +
+                                        '<octave>' + str(int(octave) + 1) + '</octave>\n' +
+                                    '</pitch>\n' +
+                                    '<duration>' + str(duration) + '</duration>\n' +
+                                    '<type>whole</type>\n' +
+                                '</note>\n')
+                    notes_xml += note_xml
                 
                 before_note = note
                 duration = 1
