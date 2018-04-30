@@ -25,7 +25,7 @@ class XmlConvertor(object):
                       '<part id="P1">\n' +
                         '<measure number="1">\n' +
                           '<attributes>\n' +
-                            '<divisions>1</divisions>\n' +
+                            '<divisions>4</divisions>\n' +
                             '<key>\n' +
                               '<fifths>0</fifths>\n' +
                             '</key>\n' +
@@ -44,13 +44,43 @@ class XmlConvertor(object):
               '</score-partwise>"')
 
         notes_xml = ""
-        duration = 1
+        
+        m_number = 1
+        duration = 0
+        all_duration = 0
+        
+        before_note = "_"
         for note in notes:
-            if len(note) == 1:
+            all_duration += 1
+            if all_duration > 4:
+                all_duration = 0
+                #duration = 0
+                
+                if len(before_note) > 1:
+                    steb = before_note[0]
+                    octave = before_note[1]
+                    note_xml = ('<note>\n' +
+                                    '<pitch>\n' +
+                                        '<step>' + steb + '</step>\n' +
+                                        '<octave>' + str(int(octave) + 1) + '</octave>\n' +
+                                    '</pitch>\n' +
+                                    '<duration>' + str(duration) + '</duration>\n' +
+                                    '<type>whole</type>\n' +
+                                '</note>\n')
+                    
+                duration = 1
+                m_number += 1
+                
+                new_measure = ('</measure>\n' +
+                               '<measure number="' + m_number + '">\n')
+                
+                notes_xml += note_xml
+            #duration check
+            if (before_note == note) or (len(note) == 1):
                 duration += 1
             else:
-                steb = note[0]
-                octave = note[1]
+                steb = before_note[0]
+                octave = before_note[1]
                 note_xml = ('<note>\n' +
                                 '<pitch>\n' +
                                     '<step>' + steb + '</step>\n' +
@@ -59,8 +89,10 @@ class XmlConvertor(object):
                                 '<duration>' + str(duration) + '</duration>\n' +
                                 '<type>whole</type>\n' +
                             '</note>\n')
-                duration = 1
                 notes_xml += note_xml
+                
+                before_note = note
+                duration = 1
             
         return header + notes_xml + footer
                 
