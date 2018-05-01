@@ -51,10 +51,8 @@ class XmlConvertor(object):
         
         before_note = "_"
         for note in notes:
-            all_duration += 1
-            if all_duration > 4:
+            if all_duration > 16:
                 all_duration = 0
-                #duration = 0
                 
                 if len(before_note) > 1:
                     steb = before_note[0]
@@ -72,11 +70,14 @@ class XmlConvertor(object):
                 m_number += 1
                 
                 new_measure = ('</measure>\n' +
-                               '<measure number="' + m_number + '">\n')
+                               '<measure number="' + str(m_number) + '">\n')
                 
                 notes_xml += note_xml
+                notes_xml += new_measure
+                
             #duration check
-            if (before_note == note) or (len(note) == 1):
+            if (before_note == note):
+                all_duration += 1
                 duration += 1
             else:
                 if len(before_note) > 1:
