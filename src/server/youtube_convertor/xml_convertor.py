@@ -41,14 +41,19 @@ class XmlConvertor(object):
   
         footer = ('</measure>\n' + 
                 '</part>\n' + 
-              '</score-partwise>"')
+            '</score-partwise>"')
 
         notes_xml = ""
         
         m_number = 1
         duration = 0
         all_duration = 0
+        beam = 0
         
+        starting = True
+        measuring = False
+        
+        before_duration = 0
         before_note = "_"
         for note in notes:
             if all_duration > 16:
@@ -63,38 +68,134 @@ class XmlConvertor(object):
                                         '<octave>' + str(int(octave) + 1) + '</octave>\n' +
                                     '</pitch>\n' +
                                     '<duration>' + str(duration) + '</duration>\n' +
-                                    '<type>whole</type>\n' +
-                                '</note>\n')
+                                    '<type>whole</type>\n')
+
+                    note_xml_beam = ''
+                    if (duration > 0) and (duration < 3) and (duration == before_duration):
+                        if beam == 0:
+                            note_xml_beam += ('<beam number="1">begin</beam>')
+                            if duration < 2:
+                                note_xml_beam += ('<beam number="2">begin</beam>')
+                        else:
+                            note_xml_beam += ('<beam number="1">continue</beam>')
+                            if duration < 2:
+                                note_xml_beam += ('<beam number="2">continue</beam>')
+                        beam += 1
+                    else if (beam > 0) and (duration < 3) and (duration > 0):
+                        note_xml_beam += ('<beam number="1">end</beam>')
+                        if duration < 2:
+                            note_xml_beam += ('<beam number="2">end</beam>')
+                        beam = 0
+                        before_duration = duration
+
+                    note_xml_end = ('</note>\n')
+
+                    note_xml += note_beam
+                    note_xml += note_xml_end
+
+                    notes_xml += note_xml
                     
                 duration = 1
-                m_number += 1
-                
-                new_measure = ('</measure>\n' +
-                               '<measure number="' + str(m_number) + '">\n')
-                
-                notes_xml += note_xml
-                notes_xml += new_measure
+                measuring = True
                 
             #duration check
             if (before_note == note):
                 all_duration += 1
                 duration += 1
             else:
-                if len(before_note) > 1:
-                    steb = before_note[0]
-                    octave = before_note[1]
-                    note_xml = ('<note>\n' +
-                                    '<pitch>\n' +
-                                        '<step>' + steb + '</step>\n' +
-                                        '<octave>' + str(int(octave) + 1) + '</octave>\n' +
-                                    '</pitch>\n' +
-                                    '<duration>' + str(duration) + '</duration>\n' +
-                                    '<type>whole</type>\n' +
-                                '</note>\n')
-                    notes_xml += note_xml
+                if starting:
+                    starting = False
+                else:
+                    if len(before_note) > 1:
+                        steb = before_note[0]
+                        octave = before_note[1]
+                        note_xml = ('<note>\n' +
+                                        '<pitch>\n' +
+                                            '<step>' + steb + '</step>\n' +
+                                            '<octave>' + str(int(octave) + 1) + '</octave>\n' +
+                                        '</pitch>\n' +
+                                        '<duration>' + str(duration) + '</duration>\n' +
+                                        '<type>whole</type>\n')
+                        
+                        note_xml_beam = ''
+                        if (duration > 0) and (duration < 3) and (duration == before_duration) and not measuring:
+                            if beam == 0:
+                                note_xml_beam += ('<beam number="1">begin</beam>')
+                                if duration < 2:
+                                    note_xml_beam += ('<beam number="2">begin</beam>')
+                            else:
+                                note_xml_beam += ('<beam number="1">continue</beam>')
+                                if duration < 2:
+                                    note_xml_beam += ('<beam number="2">continue</beam>')
+                            beam += 1
+                        else if (beam > 0) and (duration < 3) and (duration > 0):
+                            note_xml_beam += ('<beam number="1">end</beam>')
+                            if duration < 2:
+                                note_xml_beam += ('<beam number="2">end</beam>')
+                            beam = 0
+                            before_duration = duration
+
+                        note_xml_end = ('</note>\n')
+                        
+                        note_xml += note_beam
+                        note_xml += note_xml_end
+                        
+                        if measuring:
+                            measuring = False
+                            m_number += 1
+                
+                            new_measure = ('</measure>\n' + 
+                                           '<measure number="' + str(m_number) + '">\n')
+                            note_xml += new_measure
+
+                        notes_xml += note_xml
                 
                 before_note = note
                 duration = 1
+                
+        if len(before_note) > 1:
+            steb = before_note[0]
+            octave = before_note[1]
+            note_xml = ('<note>\n' +
+                            '<pitch>\n' +
+                                '<step>' + steb + '</step>\n' +
+                                '<octave>' + str(int(octave) + 1) + '</octave>\n' +
+                            '</pitch>\n' +
+                            '<duration>' + str(duration) + '</duration>\n' +
+                            '<type>whole</type>\n')
+
+            note_xml_beam = ''
+            if (duration > 0) and (duration < 3) and (duration == before_duration) and not measuring:
+                if beam == 0:
+                    note_xml_beam += ('<beam number="1">begin</beam>')
+                    if duration < 2:
+                        note_xml_beam += ('<beam number="2">begin</beam>')
+                else:
+                    note_xml_beam += ('<beam number="1">continue</beam>')
+                    if duration < 2:
+                        note_xml_beam += ('<beam number="2">continue</beam>')
+                beam += 1
+            else if (beam > 0) and (duration < 3) and (duration > 0):
+                note_xml_beam += ('<beam number="1">end</beam>')
+                if duration < 2:
+                    note_xml_beam += ('<beam number="2">end</beam>')
+                beam = 0
+                before_duration = duration
+
+            note_xml_end = ('</note>\n')
+
+            note_xml += note_beam
+            note_xml += note_xml_end
+
+            if measuring:
+                measuring = False
+                m_number += 1
+
+                new_measure = ('</measure>\n' + 
+                               '<measure number="' + str(m_number) + '">\n')
+                note_xml += new_measure
+
+            notes_xml += note_xml
             
         return header + notes_xml + footer
                 
