@@ -90,7 +90,7 @@ class XmlConvertor(object):
 
                     note_xml_end = ('</note>\n')
 
-                    note_xml += note_beam
+                    note_xml += note_xml_beam
                     note_xml += note_xml_end
 
                     notes_xml += note_xml
@@ -137,7 +137,7 @@ class XmlConvertor(object):
 
                         note_xml_end = ('</note>\n')
                         
-                        note_xml += note_beam
+                        note_xml += note_xml_beam
                         note_xml += note_xml_end
                         
                         if measuring:
@@ -184,7 +184,7 @@ class XmlConvertor(object):
 
             note_xml_end = ('</note>\n')
 
-            note_xml += note_beam
+            note_xml += note_xml_beam
             note_xml += note_xml_end
 
             if measuring:
