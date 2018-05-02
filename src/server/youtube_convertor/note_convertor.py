@@ -101,6 +101,7 @@ class NoteConvertor(object):
             return "_"
 
     def __filter(self, notes):
+        '''
         note = notes[0]
         equal_counter = 0
 
@@ -113,15 +114,18 @@ class NoteConvertor(object):
                 equal_counter = 0
             
             notes[i - 1] = notes[i - 1]
+        '''
         return notes
 
     def __test_remove_duplication(self, notes):
+        '''
         temp = notes[0]
         result = []
         for note in notes:
             if temp != note:
                 result.append(temp)
                 temp = note
-        return result           
+        '''
+        return notes           
         
 
