@@ -81,7 +81,7 @@ class XmlConvertor(object):
                             if duration < 2:
                                 note_xml_beam += ('<beam number="2">continue</beam>')
                         beam += 1
-                    else if (beam > 0) and (duration < 3) and (duration > 0):
+                    elif (beam > 0) and (duration < 3) and (duration > 0):
                         note_xml_beam += ('<beam number="1">end</beam>')
                         if duration < 2:
                             note_xml_beam += ('<beam number="2">end</beam>')
@@ -128,7 +128,7 @@ class XmlConvertor(object):
                                 if duration < 2:
                                     note_xml_beam += ('<beam number="2">continue</beam>')
                             beam += 1
-                        else if (beam > 0) and (duration < 3) and (duration > 0):
+                        elif (beam > 0) and (duration < 3) and (duration > 0):
                             note_xml_beam += ('<beam number="1">end</beam>')
                             if duration < 2:
                                 note_xml_beam += ('<beam number="2">end</beam>')
@@ -175,7 +175,7 @@ class XmlConvertor(object):
                     if duration < 2:
                         note_xml_beam += ('<beam number="2">continue</beam>')
                 beam += 1
-            else if (beam > 0) and (duration < 3) and (duration > 0):
+            elif (beam > 0) and (duration < 3) and (duration > 0):
                 note_xml_beam += ('<beam number="1">end</beam>')
                 if duration < 2:
                     note_xml_beam += ('<beam number="2">end</beam>')
