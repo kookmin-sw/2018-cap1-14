@@ -3,6 +3,7 @@
 class XmlConvertor(object):
 
     def convert(notes):
+        print(notes)
         '''
         covert note array to Music xml
         parameters -
@@ -57,7 +58,7 @@ class XmlConvertor(object):
         before_note = "_"
         for note in notes:
             if all_duration > 16:
-                all_duration = 0
+                all_duration = 1
                 
                 if len(before_note) > 1:
                     steb = before_note[0]
@@ -70,7 +71,7 @@ class XmlConvertor(object):
                                     '<duration>' + str(duration) + '</duration>\n' +
                                     '<type>whole</type>\n')
 
-                    note_xml_beam = ''
+                    note_xml_beam = ""
                     if (duration > 0) and (duration < 3) and (duration == before_duration):
                         if beam == 0:
                             note_xml_beam += ('<beam number="1">begin</beam>')
@@ -116,7 +117,7 @@ class XmlConvertor(object):
                                         '</pitch>\n' +
                                         '<duration>' + str(duration) + '</duration>\n' +
                                         '<type>whole</type>\n')
-                        
+                        #print(note_xml)                  
                         note_xml_beam = ''
                         if (duration > 0) and (duration < 3) and (duration == before_duration) and not measuring:
                             if beam == 0:
@@ -163,7 +164,7 @@ class XmlConvertor(object):
                             '</pitch>\n' +
                             '<duration>' + str(duration) + '</duration>\n' +
                             '<type>whole</type>\n')
-
+      
             note_xml_beam = ''
             if (duration > 0) and (duration < 3) and (duration == before_duration) and not measuring:
                 if beam == 0:
@@ -196,7 +197,8 @@ class XmlConvertor(object):
                 note_xml += new_measure
 
             notes_xml += note_xml
-            
+        print(header + notes_xml + footer)
+           
         return header + notes_xml + footer
                 
                     
