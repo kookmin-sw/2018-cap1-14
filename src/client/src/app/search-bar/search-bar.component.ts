@@ -26,7 +26,7 @@ export class SearchBarComponent implements OnInit {
   onSubmit() {
     let serverUrl = "http://localhost:5000/extract";
     this.http.post(serverUrl, {"youtubeUrl":this.youtubeUrl}, this.headers).subscribe((data) => {
-      this.openSheet(data["xml"]);
+      //this.openSheet(data["xml"]);
     });
   }
 
