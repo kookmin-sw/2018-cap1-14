@@ -19,7 +19,7 @@ import { MusicSheetPartComponent } from './music-sheet/music-sheet-part/music-sh
     LogoComponent,
     SearchBarComponent,
     TopBarComponent,
-    ContentComponent
+    ContentComponent,
     MusicSheetComponent,
     MusicSheetPartComponent
   ],
