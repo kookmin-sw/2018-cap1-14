@@ -36,7 +36,7 @@ export class MusicSheetPartComponent implements OnInit {
     this.canvasContext.stroke(); 
     
     this.canvasContext.lineWidth=10;
-    this.canvasContext.strokeStyle = "rgb(100,200,150,1)");
+    this.canvasContext.strokeStyle = "rgb(100,200,150,1)";
     this.canvasContext.beginPath();
     for(let i = 0; i < this.notes.length; i++) {
       let note = this.notes[i];

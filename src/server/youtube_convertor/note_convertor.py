@@ -20,7 +20,7 @@ class NoteConvertor(object):
             pitch = self.__fourier_transform(part)
             note = self.__decide_note(pitch)
             notes.append(note)
-        return self.__test_remove_duplication(self.__filter(notes))
+        return notes
 
     def __fourier_transform(self, wave_sample):
         size = len(wave_sample)
@@ -42,90 +42,62 @@ class NoteConvertor(object):
 
     def __decide_note(self, pitch):
         if pitch > 127 and pitch <= 131:
-            return "C3"
+            return {"pitch":1, "octave":3}
         elif pitch > 131 and pitch <= 147:
-            return "D3"
+            return {"pitch":2, "octave":3}
         elif pitch > 147 and pitch <= 165:
-            return "E3"
+            return {"pitch":3, "octave":3}
         elif pitch > 165 and pitch <= 175:
-            return "F3"
+            return {"pitch":4, "octave":3}
         elif pitch > 175 and pitch <= 196:
-            return "G3"
+            return {"pitch":5, "octave":3}
         elif pitch > 196 and pitch <= 220:
-            return "A3"
+            return {"pitch":6, "octave":3}
         elif pitch > 220 and pitch <= 247:
-            return "B3"
+            return {"pitch":7, "octave":3}
         elif pitch > 247 and pitch <= 262:
-            return "C4"
+            return {"pitch":1, "octave":4}
         elif pitch > 262 and pitch <= 294:
-            return "D4"
+            return {"pitch":2, "octave":4}
         elif pitch > 294 and pitch <= 330:
-            return "E4"
+            return {"pitch":3, "octave":4}
         elif pitch > 330 and pitch <= 349:
-            return "F4"
+            return {"pitch":4, "octave":4}
         elif pitch > 349 and pitch <= 392:
-            return "G4"
+            return {"pitch":5, "octave":4}
         elif pitch > 392 and pitch <= 440:
-            return "A4"
+            return {"pitch":6, "octave":4}
         elif pitch > 440 and pitch <= 494:
-            return "B4"
+            return {"pitch":7, "octave":4}
         elif pitch > 494 and pitch <= 523:
-            return "C5"
+            return {"pitch":1, "octave":5}
         elif pitch > 523 and pitch <= 587:
-            return "D5"
+            return {"pitch":2, "octave":5}
         elif pitch > 587 and pitch <= 659:
-            return "E5"
+            return {"pitch":3, "octave":5}
         elif pitch > 659 and pitch <= 698:
-            return "F5"
+            return {"pitch":4, "octave":5}
         elif pitch > 698 and pitch <= 784:
-            return "G5"
+            return {"pitch":5, "octave":5}
         elif pitch > 784 and pitch <= 880:
-            return "A5"
+            return {"pitch":6, "octave":5}
         elif pitch > 880 and pitch <= 988:
-            return "B5"
+            return {"pitch":7, "octave":5}
         elif pitch > 988 and pitch <= 1047:
-            return "C6"
+            return {"pitch":1, "octave":6}
         elif pitch > 1047 and pitch <= 1175:
-            return "D6"
+            return {"pitch":2, "octave":6}
         elif pitch > 1175 and pitch <= 1319:
-            return "E6"
+            return {"pitch":3, "octave":6}
         elif pitch > 1319 and pitch <= 1397:
-            return "F6"
+            return {"pitch":4, "octave":6}
         elif pitch > 1397 and pitch <= 1568:
-            return "G6"
+            return {"pitch":5, "octave":6}
         elif pitch > 1568 and pitch <= 1760:
-            return "A6"
+            return {"pitch":6, "octave":6}
         elif pitch > 1760 and pitch <= 1976:
-            return "B6"
+            return {"pitch":7, "octave":6}
         else:
-            return "_"
+            return {"pitch":-1, "octave":-1}
 
-    def __filter(self, notes):
-        '''
-        note = notes[0]
-        equal_counter = 0
-
-        for i in range(1, self.block_length):
-            if notes[i] == note:
-                equal_counter += 1
-            else:
-                if equal_counter < 1:
-                    notes[i - 1] = note
-                equal_counter = 0
-            
-            notes[i - 1] = notes[i - 1]
-        '''
-        return notes
-
-    def __test_remove_duplication(self, notes):
-        '''
-        temp = notes[0]
-        result = []
-        for note in notes:
-            if temp != note:
-                result.append(temp)
-                temp = note
-        '''
-        return notes           
-        
 

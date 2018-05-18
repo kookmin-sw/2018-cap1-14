@@ -13,13 +13,10 @@ def extract():
 
     youtube = WaveConvertor()
     wave = youtube.get_wave(youtube_url)
-        
     note_convertor = NoteConvertor(wave)
     notes = note_convertor.convert()
-
-    xml = XmlConvertor.convert(notes)
-
-    return jsonify(xml=xml)
+    json = jsonify(notes=notes)
+    return json
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", threaded=True)
