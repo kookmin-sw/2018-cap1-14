@@ -20,7 +20,7 @@ class NoteConvertor(object):
             pitch = self.__fourier_transform(part)
             note = self.__decide_note(pitch)
             notes.append(note)
-        return self.__test_remove_duplication(self.__filter(notes))
+        return notes
 
     def __fourier_transform(self, wave_sample):
         size = len(wave_sample)
@@ -34,9 +34,9 @@ class NoteConvertor(object):
         
         amplitude_Hz = 2*abs(Y)
         phase_ang = np.angle(Y)*180/np.pi
-        bank = np.where((amplitude_Hz >= (amplitude_Hz.max() / 4)) & (amplitude_Hz > 400))
+        bank = np.where((amplitude_Hz >= (amplitude_Hz.max() * 0.75)) & (amplitude_Hz > 400))
         if len(bank[0]) > 1:
-            return f0[bank[0][0]]
+            return bank
         else:
             return -1
 
@@ -100,32 +100,4 @@ class NoteConvertor(object):
         else:
             return "_"
 
-    def __filter(self, notes):
-        '''
-        note = notes[0]
-        equal_counter = 0
-
-        for i in range(1, self.block_length):
-            if notes[i] == note:
-                equal_counter += 1
-            else:
-                if equal_counter < 1:
-                    notes[i - 1] = note
-                equal_counter = 0
-            
-            notes[i - 1] = notes[i - 1]
-        '''
-        return notes
-
-    def __test_remove_duplication(self, notes):
-        '''
-        temp = notes[0]
-        result = []
-        for note in notes:
-            if temp != note:
-                result.append(temp)
-                temp = note
-        '''
-        return notes           
-        
 
