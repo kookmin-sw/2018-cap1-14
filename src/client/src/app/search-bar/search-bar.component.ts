@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OSMD } from "opensheetmusicdisplay";
 
@@ -10,14 +10,13 @@ import { OSMD } from "opensheetmusicdisplay";
 export class SearchBarComponent implements OnInit {
 
   youtubeUrl: string;
+  @Output() getNoteEmitter:EventEmitter<string> = new EventEmitter<string>();
   headers;
   constructor(public http: HttpClient) { 
     this.youtubeUrl="";
     this.headers = new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-
-
+      'Content-Type':  'application/json',
+    })
   }
 
   ngOnInit() {
@@ -26,6 +25,7 @@ export class SearchBarComponent implements OnInit {
   onSubmit() {
     let serverUrl = "http://localhost:5000/extract";
     this.http.post(serverUrl, {"youtubeUrl":this.youtubeUrl}, this.headers).subscribe((data) => {
+      this.getNoteEmitter.emit(data["notes"]);
       //this.openSheet(data["xml"]);
     });
   }

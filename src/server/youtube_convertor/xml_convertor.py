@@ -76,7 +76,7 @@ class XmlConvertor(object):
                         
                         note_xml_beam = ""
                         if (duration == before_duration) and (duration > 0):
-                            if duration < 3
+                            if duration < 3:
                                 if beam == 0:
                                     note_xml_beam += ('<beam number="1">begin</beam>')
                                     if duration < 2:
@@ -125,7 +125,7 @@ class XmlConvertor(object):
 
             note_xml_beam = ""
             if (duration == before_duration) and (duration > 0):
-                if duration < 3
+                if duration < 3:
                     if beam == 0:
                         note_xml_beam += ('<beam number="1">begin</beam>')
                         if duration < 2:
