@@ -38,8 +38,7 @@ class NoteConvertor(object):
         banks = np.where((amplitude_Hz >= (amplitude_Hz.max() * 0.90)) & (amplitude_Hz > 400))
         pitchs = []
         for bank in banks[0]:
-          print(amplitude_Hz[bank])
-          pitchs.append(amplitude_Hz[bank])
+          pitchs.append(f0[bank])
         return pitchs
 
     def __decide_note(self, pitch):
