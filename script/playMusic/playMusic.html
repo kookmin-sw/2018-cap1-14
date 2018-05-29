@@ -54,9 +54,13 @@
         function playFun() {
             start = 1;
             playMusic();
+            alert(window.location.pathname);
         }
         function pauseFun() {
             start = 0;
+            var audio = new Audio("http://cfile24.uf.tistory.com/media/182D84504DA95E5F0A6FEA");
+            audio.play();
+            
         }
         function stopFun() {
             start = 0;
