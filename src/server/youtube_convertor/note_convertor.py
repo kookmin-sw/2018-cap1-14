@@ -35,7 +35,7 @@ class NoteConvertor(object):
         
         amplitude_Hz = 2*abs(Y)
         phase_ang = np.angle(Y)*180/np.pi
-        banks = np.where((amplitude_Hz >= (amplitude_Hz.max() * 0.90)) & (amplitude_Hz > 400))
+        banks = np.where((amplitude_Hz >= (amplitude_Hz.max() * 0.90)) & (amplitude_Hz > 500))
         pitchs = []
         for bank in banks[0]:
           pitchs.append(f0[bank])

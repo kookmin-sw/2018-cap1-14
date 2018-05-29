@@ -12,12 +12,12 @@ export class MusicSheetPartComponent implements OnInit {
   currentNote: number;
   notes: any;
   part: any;
+  testNotes = [[{pitch:5, octave:4}], [{pitch:5, octave:4}], [{pitch:5, octave:4}], [{pitch:4, octave:4}], [{pitch:3, octave:4}], [{pitch:2, octave:4}], [{pitch:1, octave:4}], [{pitch:1, octave:5}], [{pitch:2, octave:5}]];
   
 
   constructor() { }
   ngOnInit() {
-    this.currentNote = 0;
-    this.notes = [{pitch:1, octave:3}, {pitch:1, octave:3}, {pitch:1, octave:4}, {pitch:2, octave:3}, {pitch:3, octave:3}, {pitch:4, octave:3}];
+    this.currentNote = 0; 
   }
 
   drawSheet() {
@@ -35,16 +35,22 @@ export class MusicSheetPartComponent implements OnInit {
     this.canvasContext.lineTo(500, 20 +  40 * 1.8);
     this.canvasContext.moveTo(0, 20 +  50 * 1.8);
     this.canvasContext.lineTo(500, 20 +  50 * 1.8);
-    this.canvasContext.stroke(); 
+    this.canvasContext.stroke();
+    let context = this.canvasContext; 
+    let clefImage = new Image();
+    clefImage.onload = function() {
+      context.drawImage(clefImage, 0, 10, 10, 130);
+    };
+    clefImage.src = "https://i.pinimg.com/originals/b3/3d/cd/b33dcd63310419d58a84067db0d8f0f1.png"
     
     this.canvasContext.lineWidth=10;
     this.canvasContext.strokeStyle = "rgb(100,200,150,1)";
     this.canvasContext.beginPath();
     for(let i = 0; i < this.notes.length; i++) {
       for(let note of this.notes[i]) {
-        let pitch = 140 - note["pitch"] * 10;
-        let octave = (note["octave"] - 3);
-        let start = i * 2;
+        let pitch = 141 - note["pitch"] * 10;
+        let octave = (note["octave"] - 4) * 57;
+        let start = i * 2 + 25;
         let end = start + 2;
         this.canvasContext.moveTo(start, pitch - octave);
         this.canvasContext.lineTo(end, pitch - octave);
@@ -55,6 +61,7 @@ export class MusicSheetPartComponent implements OnInit {
   ngOnChanges(changes) {
     if(changes.part.currentValue) {
       this.notes = this.part;
+      //this.notes = this.testNotes;
       this.drawSheet();     
     }
   }
