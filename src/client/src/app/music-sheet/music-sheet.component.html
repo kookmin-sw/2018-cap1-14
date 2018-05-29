@@ -1,3 +1,4 @@
 <div class="music-sheet">
+    <app-play-music *ngIf="notes" [notes]="notes"></app-play-music>
     <app-music-sheet-part *ngFor="let part of parts" [part]="part"></app-music-sheet-part>
 </div>

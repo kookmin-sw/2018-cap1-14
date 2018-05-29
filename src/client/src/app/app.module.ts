@@ -11,6 +11,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { ContentComponent } from './content/content.component';
 import { MusicSheetComponent } from './music-sheet/music-sheet.component';
 import { MusicSheetPartComponent } from './music-sheet/music-sheet-part/music-sheet-part.component';
+import { PlayMusicComponent } from './play-music/play-music.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MusicSheetPartComponent } from './music-sheet/music-sheet-part/music-sh
     TopBarComponent,
     ContentComponent,
     MusicSheetComponent,
-    MusicSheetPartComponent
+    MusicSheetPartComponent,
+    PlayMusicComponent
   ],
   imports: [
     BrowserModule,
