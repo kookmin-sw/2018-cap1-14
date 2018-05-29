@@ -33,7 +33,7 @@ class WaveConvertor(object):
                 file name to create
         '''
         print("download start")
-        YouTube(youtube_url).streams.first().download(output_path="cache", filename=filename)
+        YouTube(youtube_url).streams.filter(subtype="mp4").first().download(output_path="cache", filename=filename)
         print("download finished")
 
     def __convert_mp4_to_wav(self, filename):

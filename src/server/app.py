@@ -1,17 +1,26 @@
-from flask import Flask
-from youtube_convertor import wave_convertor
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from scipy.io import wavfile # get the api
+from youtube_convertor import WaveConvertor, XmlConvertor, NoteConvertor
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "hello music seat"
+CORS(app)
+@app.route("/extract", methods=["POST"])
+def extract():
+    json = request.get_json()
+    youtube_url = json["youtubeUrl"]
 
-@app.route("/convert-test")
-def convert():
     youtube = WaveConvertor()
-    youtube.get_wave("https://www.youtube.com/watch?v=q3fHXqXYMfA")
-    return "test"
+    wave = youtube.get_wave(youtube_url)
+        
+    note_convertor = NoteConvertor(wave)
+    notes = note_convertor.convert()
+
+    #xml = XmlConvertor.convert(notes)
+
+    return jsonify(notes=notes)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", threaded=True)
+
