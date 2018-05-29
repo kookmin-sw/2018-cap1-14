@@ -49,7 +49,7 @@ export class MusicSheetPartComponent implements OnInit {
     for(let i = 0; i < this.notes.length; i++) {
       for(let note of this.notes[i]) {
         let pitch = 141 - note["pitch"] * 10;
-        let octave = (note["octave"] - 4) * 57;
+        let octave = (note["octave"] - 4) * 55;
         let start = i * 2 + 25;
         let end = start + 2;
         this.canvasContext.moveTo(start, pitch - octave);
