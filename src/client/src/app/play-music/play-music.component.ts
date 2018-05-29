@@ -40,7 +40,9 @@ export class PlayMusicComponent implements OnInit {
               this.bank[i] = 1;
 
               var name = i + ".wav";
-              var audio = new Audio(name);
+              let audio = new Audio();
+              audio.src = "../../assets/" + name;
+              audio.load();
               audio.play();
           } else if (wavPoint[i] == 0){
               this.bank[i] = 0;
@@ -53,9 +55,12 @@ export class PlayMusicComponent implements OnInit {
           this.playSound(this.convertedNotes[this.point]);
 
           this.point++;
-
-          if (this.start > 0)
-              setTimeout('playMusic()', 100);
+          let that = this;
+          if (this.start > 0) {
+              setTimeout(function () {
+                  that.playMusic();
+              }, 100);
+          }
       }
   }
 

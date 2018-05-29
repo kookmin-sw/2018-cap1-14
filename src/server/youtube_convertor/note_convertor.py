@@ -42,7 +42,7 @@ class NoteConvertor(object):
         return pitchs
 
     def __decide_note(self, pitch):
-        if pitch > 127 and pitch <= 131:
+        if pitch > 127 and pitch <= 134:
             return {"pitch":1, "octave" : 3}
         elif pitch > 131 and pitch <= 147:
             return {"pitch":2, "octave" : 3}
