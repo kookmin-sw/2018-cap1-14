@@ -23,13 +23,30 @@ class NoteConvertor(object):
             notes.append(note)
 
 	    #remove junk
+        final_notes = []
 
-	    for i in range(1, len(notes)):
-	      if (notes[i]["pitch"] == "_" and notes[i]["pitch"] != notes[i-1]["pitch"] and notes[i]["pitch"] != notes[i+1]["pitch"]):
-	        notes[i]["pitch"] = notes[i-1]["pitch"]
-		notes[i]["octave"] = notes[i-1]["octave"]
-		
-        return notes
+        for i in range(0, len(notes)):
+            if i == 0:
+                final_notes.append(notes[i])
+            else:
+                temp_note = []
+                for j in range(0, len(notes[i])):
+                    if notes[i][j]["pitch"] != "_":
+                        end = 0
+                        for k in range(0, len(notes[i-1])):
+                            if notes[i][j]["pitch"] == notes[i-1][k]["pitch"] and notes[i][j]["octave"] == notes[i-1][k]["octave"]:
+                                temp_note.append(notes[i][j])
+                                end = 1
+                                break
+                        if end == 0:
+                            for k in range(0, len(notes[i+1])):
+                                if notes[i][j]["pitch"] == notes[i+1][k]["pitch"] and notes[i][j]["octave"] == notes[i+1][k]["octave"]:
+                                    temp_note.append(notes[i][j])
+                                    end = 1
+                                    break
+                final_notes.append(temp_note)                                                                                                
+
+        return final_notes
 
     def __fourier_transform(self, wave_sample):
         size = len(wave_sample)
