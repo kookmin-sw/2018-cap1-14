@@ -21,6 +21,14 @@ class NoteConvertor(object):
             for pitch in pitchs:
               note.append(self.__decide_note(pitch))
             notes.append(note)
+
+	    #remove junk
+
+	    for i in range(1, len(notes)):
+	      if (notes[i]["pitch"] == "_" and notes[i]["pitch"] != notes[i-1]["pitch"] and notes[i]["pitch"] != notes[i+1]["pitch"]):
+	        notes[i]["pitch"] = notes[i-1]["pitch"]
+		notes[i]["octave"] = notes[i-1]["octave"]
+		
         return notes
 
     def __fourier_transform(self, wave_sample):
