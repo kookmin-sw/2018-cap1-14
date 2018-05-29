@@ -3,6 +3,7 @@
 class XmlConvertor(object):
 
     def convert(notes):
+        print(notes)
         '''
         covert note array to Music xml
         parameters -
@@ -73,6 +74,15 @@ class XmlConvertor(object):
                                         '</pitch>\n' +
                                         '<duration>' + str(duration) + '</duration>\n' +
                                         '<type>whole</type>\n')
+                        #print(note_xml)                  
+                        note_xml_beam = ''
+                        if (duration > 0) and (duration < 3) and (duration == before_duration) and not measuring:
+                            if beam == 0:
+                                note_xml_beam += ('<beam number="1">begin</beam>')
+                                if duration < 2:
+                                    note_xml_beam += ('<beam number="2">begin</beam>')
+                            else:
+                                note_xml_beam += ('<beam number="1">continue</beam>')
                         
                         note_xml_beam = ""
                         if (duration == before_duration) and (duration > 0):
@@ -122,7 +132,6 @@ class XmlConvertor(object):
                             '</pitch>\n' +
                             '<duration>' + str(duration) + '</duration>\n' +
                             '<type>whole</type>\n')
-
             note_xml_beam = ""
             if (duration == before_duration) and (duration > 0):
                 if duration < 3:
@@ -138,28 +147,7 @@ class XmlConvertor(object):
             elif duration > 0:
                 if (duration < 3) and (beam > 0):
                     note_xml_beam += ('<beam number="1">end</beam>')
-                    if duration < 2:
-                        note_xml_beam += ('<beam number="2">end</beam>')
-                    beam = 0
-                before_duration = duration
-
-            note_xml_end = ('</note>\n')
-
-            note_xml += note_xml_beam
-            note_xml += note_xml_end
-
-            if all_duration > 16:
-                all_duration = 1
-                m_number += 1
-
-                new_measure = ('</measure>\n' + 
-                               '<measure number="' + str(m_number) + '">\n')
-                note_xml += new_measure
-
-            notes_xml += note_xml
-            
         print(header + notes_xml + footer)
-        
         return header + notes_xml + footer
                 
                     

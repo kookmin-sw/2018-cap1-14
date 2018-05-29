@@ -23,7 +23,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSubmit() {
-    let serverUrl = "http://localhost:5000/extract";
+    let serverUrl = "http://13.209.60.95:5000/extract";
     this.http.post(serverUrl, {"youtubeUrl":this.youtubeUrl}, this.headers).subscribe((data) => {
       this.getNoteEmitter.emit(data["notes"]);
       //this.openSheet(data["xml"]);
