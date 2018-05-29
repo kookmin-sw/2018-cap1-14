@@ -9,6 +9,9 @@ import { LogoComponent } from './logo/logo.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ContentComponent } from './content/content.component';
+import { MusicSheetComponent } from './music-sheet/music-sheet.component';
+import { MusicSheetPartComponent } from './music-sheet/music-sheet-part/music-sheet-part.component';
+import { PlayMusicComponent } from './play-music/play-music.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ContentComponent } from './content/content.component';
     LogoComponent,
     SearchBarComponent,
     TopBarComponent,
-    ContentComponent
+    ContentComponent,
+    MusicSheetComponent,
+    MusicSheetPartComponent,
+    PlayMusicComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
 <div>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (getNoteEmitter)="getNote($event)"></app-search-bar>
+    <app-music-sheet [notes]="notes"></app-music-sheet>
 </div>

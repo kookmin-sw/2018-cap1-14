@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script>
+        var start = 0;
+        var wav = [
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        var bank = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var point = 0;
+        
+        function playSound(wavPoint) {
+            for (i = 0; i < wavPoint.length; i++) {
+                //test.innerHTML += wavPoint[i];
+                if (wavPoint[i] > 0 && bank[i] == 0) {
+                    bank[i] = 1;
+
+                    var name = i + ".wav";
+                    var audio = new Audio(name);
+                    audio.play();
+                } else if (wavPoint[i] == 0){
+                    bank[i] = 0;
+                }
+            }
+
+            test.innerHTML += "\n";
+        }
+
+        function playMusic() {
+            if (point < wav.length && start > 0) {
+                playSound(wav[point]);
+
+                point++;
+
+                if (start > 0)
+                    setTimeout('playMusic()', 100);
+            }
+        }
+
+        function playFun() {
+            start = 1;
+            playMusic();
+        }
+        function pauseFun() {
+            start = 0;
+        }
+        function stopFun() {
+            start = 0;
+            point = 0;
+        }
+    </script>
+</head>
+<body>
+    <script>
+        setInterval('playMusic()', 100);
+    </script>
+    <div id="test">
+        <input type="button" value="▶" onmousedown="playFun()"/>
+        <input type="button" value="||" onmousedown="pauseFun()"/>
+        <input type="button" value="■" onmousedown="stopFun()"/>
+    </div>
+</body>
+</html>
